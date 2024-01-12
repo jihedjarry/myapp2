@@ -60,10 +60,9 @@ node() {
 	
 	/*Création de l'image */
         stage('build et run'){
-        def version = '1.0'
-	sh '''
-		docker build -t myapp:$version
-		docker run -d -p 80:5000 -e PORT=5000 --name myapp myapp:$version
+        sh '''
+		docker build -t myapp:1.0
+		docker run -d -p 80:5000 -e PORT=5000 --name myapp myapp:1.0
 		sleep 5s
 	'''
         }
@@ -72,9 +71,9 @@ node() {
 	stage('Test'){
 	sh '''
 		curl http://localhost
-		docker stop ${nameApp}
-		docker rm ${nameApp}
-		docker rmi ${nameApp}:${version}	
+		docker stop -f myapp
+		docker rm myapp
+		docker rmi myapp:1.0	
 	''' 
         }
 
