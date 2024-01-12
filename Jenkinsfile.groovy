@@ -42,8 +42,7 @@ node() {
 	}
 
 	/*version */
-	def IMAGE_NAME='myapp2'
-    	def version='1.0'
+	def version='1.0'
     
 	/* Récupération du commitID long */
     	def commitIdLong = sh returnStdout: true, script: 'git rev-parse HEAD'
@@ -82,7 +81,7 @@ node() {
 	def imageName='192.168.222.176:5000/myapp'
     	stage('DOCKER - Build/Push registry'){
       	docker.withRegistry('http://192.168.222.176:5000', 'myregistry_login') {
-		def customImage = docker.build("myapp2:1.0-${commitId}")
+		def customImage = docker.build("$imageName:${version}-${commitId}")
         	customImage.push()
  		}
       	sh "docker rmi myapp2:1.0-${commitId}"
