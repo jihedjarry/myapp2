@@ -85,7 +85,7 @@ node() {
 		def customImage = docker.build("myapp2:1.0-${commitId}")
         	customImage.push()
  		}
-      	sh "docker rmi myapp2:1.0-${commitId}
+      	sh "docker rmi myapp2:1.0-${commitId}"
     	}
 
 	/* Docker - test */
