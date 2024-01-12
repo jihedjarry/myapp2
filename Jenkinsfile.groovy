@@ -71,7 +71,7 @@ node() {
 	
 	/*Test*/
 	stage('Test'){
-	curl http://localhost 
+	sh 'curl http://localhost' 
         }
 
 	def imageName='192.168.222.176:5000/myapp'
