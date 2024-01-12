@@ -42,8 +42,9 @@ node() {
 	}
 
 	/*version */
-	def version='1.0'
-    	def nameApp='myapp2'
+	def version = "1.0"
+    	def nameApp = "myapp2"
+
 	/* Récupération du commitID long */
     	def commitIdLong = sh returnStdout: true, script: 'git rev-parse HEAD'
 
