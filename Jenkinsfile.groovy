@@ -43,7 +43,7 @@ node() {
 
 	/*version */
 	def version='1.0'
-    
+    	def nameApp='myapp2'
 	/* Récupération du commitID long */
     	def commitIdLong = sh returnStdout: true, script: 'git rev-parse HEAD'
 
@@ -62,8 +62,8 @@ node() {
 	/*Création de l'image */
         stage('build et run'){
         sh '''
-		docker build -t myapp2:1.0 .
-		docker run -d -p 80:5000 -e PORT=5000 --name myapp2 myapp2:1.0
+		docker build -t ${nameApp}:${version} .
+		docker run -d -p 80:5000 -e PORT=5000 --name ${nameApp} ${nameApp}:${version}
 		sleep 5s
 	'''
         }
@@ -72,9 +72,9 @@ node() {
 	stage('Test'){
 	sh '''
 		curl http://localhost
-		docker stop myapp2
-		docker rm myapp2
-		docker rmi myapp2:1.0	
+		docker stop ${nameApp}
+		docker rm ${nameApp}
+		docker rmi ${nameApp}:${version}	
 	''' 
         }
 
