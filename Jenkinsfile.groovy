@@ -89,21 +89,7 @@ node() {
       	sh 'curl -sk --user $USERNAME:$PASSWORD https://192.168.222.176:5000/v2/myapp/tags/list'
       	 }
     	}
-	/*
-	/* Ansible - deploy */
-	stage('ANSIBLE - Deploy'){
-      	git branch: 'master', url: 'https://github.com/jihedjarry/deploy-ansible.git'
-      	sh "mkdir -p roles"
-      	sh "ansible-galaxy install --roles-path roles -r requirements.yml"
-      	ansiblePlaybook (
-            colorized: true,
-            playbook: "playbook_install_myapp.yml",
-            hostKeyChecking: false,
-            inventory: "env/${branchName}/hosts",
-            extras: "-u jarry -e 'image=$imageName:${version}-${commitId}' -e 'version=${version}'"
-            )
-    	}
-    */
+
     } finally {
         sh 'docker rm -f postgres'
         cleanWs()
