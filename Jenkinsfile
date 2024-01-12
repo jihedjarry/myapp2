@@ -38,7 +38,7 @@ node() {
         
         /*Récupération du dépôt git applicatif */
     	stage('SERVICE - Git checkout'){
-      	git branch: branchName, url: "https://github.com/jihedjarry/myapp.git"
+      	git branch: branchName, url: "https://github.com/jihedjarry/myapp2.git"
 	}
 
 	/*version */
