@@ -82,10 +82,10 @@ node() {
 	def imageName='192.168.222.176:5000/myapp'
     	stage('DOCKER - Build/Push registry'){
       	docker.withRegistry('http://192.168.222.176:5000', 'myregistry_login') {
-		def customImage = docker.build("myapp2:1.0-${commitId}")
+		def customImage = docker.build("$imageName:$version-${commitId}")
         	customImage.push()
  		}
-      	sh "docker rmi myapp2:1.0-${commitId}"
+      	sh "docker rmi $imageName:$version-${commitId}
     	}
 
 	/* Docker - test */
