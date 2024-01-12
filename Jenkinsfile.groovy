@@ -1,5 +1,6 @@
 def project_token = 'abcdefghijklmnopqrstuvwxyz0123456789ABCDEF'
-
+def version = '1.0'
+def nameApp = 'myapp2'
 // Reference the GitLab connection name from your Jenkins Global configuration (https://JENKINS_URL/configure, GitLab section)
 properties([
     gitLabConnection('your-gitlab-connection-name'),
@@ -41,9 +42,6 @@ node() {
       	git branch: branchName, url: "https://github.com/jihedjarry/myapp2.git"
 	}
 
-	/*version */
-	def version = "1.0"
-    	def nameApp = "myapp2"
 
 	/* Récupération du commitID long */
     	def commitIdLong = sh returnStdout: true, script: 'git rev-parse HEAD'
