@@ -1,6 +1,6 @@
 def project_token = 'abcdefghijklmnopqrstuvwxyz0123456789ABCDEF'
 def version = '1.0'
-def nameApp = 'myapp2'
+def APP_NAME = 'myapp2'
 // Reference the GitLab connection name from your Jenkins Global configuration (https://JENKINS_URL/configure, GitLab section)
 properties([
     gitLabConnection('your-gitlab-connection-name'),
@@ -61,7 +61,7 @@ node() {
 	/*Création de l'image */
         stage('build et run'){
         sh '''
-		docker build -t $nameApp:$version .
+		docker build -t ${APP_NAME}:${version} .
 		docker run -d -p 80:5000 -e PORT=5000 --name $nameApp $nameApp:$version
 		sleep 5s
 	'''
