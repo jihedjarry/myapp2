@@ -62,7 +62,7 @@ node() {
 	
 	/*Création de l'image */
         stage('build et run'){
-        docker build -t myapp2:1.0 .
+        sh 'docker build -t myapp2:1.0 .'
 	docker run -d -p 80:5000 -e PORT=5000 --name ${IMAGE_NAME} ${IMAGE_NAME}:${version}
 	sleep 5s
         }
