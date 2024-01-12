@@ -71,7 +71,7 @@ node() {
 	stage('Test'){
 	sh '''
 		curl http://localhost
-		docker stop -f myapp
+		docker stop myapp
 		docker rm myapp
 		docker rmi myapp:1.0	
 	''' 
