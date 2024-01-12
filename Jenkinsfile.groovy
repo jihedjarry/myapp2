@@ -71,7 +71,12 @@ node() {
 	
 	/*Test*/
 	stage('Test'){
-	sh 'curl http://localhost' 
+	sh '''
+		curl http://localhost
+		docker stop myapp2
+		docker rm myapp2
+		docker rmi myapp2:1.0	
+	''' 
         }
 
 	def imageName='192.168.222.176:5000/myapp'
@@ -89,7 +94,6 @@ node() {
       	sh 'curl -sk --user $USERNAME:$PASSWORD https://192.168.222.176:5000/v2/myapp/tags/list'
       	 }
     	}
-
     } finally {
         cleanWs()
     }
