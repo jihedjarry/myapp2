@@ -64,7 +64,7 @@ node() {
         stage('build et run'){
         sh '''
 		docker build -t myapp2:1.0 .
-		docker run -d -p 80:5000 -e PORT=5000 --name ${IMAGE_NAME} ${IMAGE_NAME}:${version}
+		docker run -d -p 80:5000 -e PORT=5000 --name myapp2 myapp2:1.0
 		sleep 5s
 	'''
         }
@@ -77,10 +77,10 @@ node() {
 	def imageName='192.168.222.176:5000/myapp'
     	stage('DOCKER - Build/Push registry'){
       	docker.withRegistry('http://192.168.222.176:5000', 'myregistry_login') {
-		def customImage = docker.build("$imageName:${version}-${commitId}")
+		def customImage = docker.build("myapp2:1.0-${commitId}")
         	customImage.push()
  		}
-      	sh "docker rmi $imageName:${version}-${commitId}"
+      	sh "docker rmi myapp2:1.0-${commitId}"
     	}
 
 	/* Docker - test */
@@ -91,7 +91,6 @@ node() {
     	}
 
     } finally {
-        sh 'docker rm -f postgres'
         cleanWs()
     }
 }
