@@ -8,7 +8,7 @@ class AppTestCase(unittest.TestCase):
    def test_root_text(self):
         tester = app.test_client(self)
         response = tester.get('/')
-        assert 'Hello world Jarry!' in response.data
+        assert 'Hello world Jarry Jihed!' in response.data
 
 if __name__ == '__main__':
     unittest.main()
